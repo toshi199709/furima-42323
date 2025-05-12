@@ -8,9 +8,14 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+    <%= javascript_importmap_tags %>
 </head>
 
 <body>
+  <% flash.each do |key, message| %>
+    <div class="flash-message <%= key %>"><%= message %></div>
+  <% end %>
+
   <%= yield %>
 </body>
 
