@@ -1,7 +1,6 @@
 # app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
   before_action :basic_auth
-  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
@@ -18,9 +17,5 @@ class ApplicationController < ActionController::Base
                                         :last_name_kana, :first_name_kana,
                                         :birthday
                                       ])
-  end
-
-  def after_sign_out_path_for(_resource_or_scope)
-    root_path
   end
 end
