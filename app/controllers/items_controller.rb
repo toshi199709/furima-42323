@@ -1,52 +1,25 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  def index
-    # @items = Item.all
+  def new
+    @item = Item.new
   end
 
-  # def new
-  #   @item = Item.new
-  # end
+  def create
+    @item = Item.new(item_params)
+    @item.user = current_user # 出品者を紐づける（devise前提）
 
-  # def create
-  #   @item = Item.new(item_params)
-  #   if @item.save
-  #     redirect_to @item
-  #   else
-  #     render :new
-  #   end
-  # end
+    if @item.save
+      redirect_to root_path # 保存成功→トップページへ
+    else
+      render :new # 保存失敗→出品ページに戻る
+    end
+  end
 
-  # def show
-  #   @item = Item.find(params[:id])
-  # end
+  private
 
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end
-
-  # def update
-  #   @item = Item.find(params[:id])
-  #   if @item.update(item_params)
-  #     redirect_to @item
-  #   else
-  #     render :edit
-  #   end
-  # end
-
-  # def destroy
-  #   item = Item.find(params[:id])
-  #   item.destroy
-  #   redirect_to root_path
-  # end
-
-  # private
-
-  # def item_params
-  #   params.require(:item).permit(
-  #     :name, :description, :image, :price,
-  #     :category_id, :condition_id, :shipping_fee_status_id,
-  #     :prefecture_id, :shipping_day_id
-  #   )
-  # end
+  def item_params
+    params.require(:item).permit(
+      :name, :description, :category_id, :condition_id, :shipping_fee_status_id,
+      :prefecture_id, :shipping_day_id, :price, :image
+    )
+  end
 end
