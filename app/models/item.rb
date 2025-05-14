@@ -19,7 +19,7 @@ class Item < ApplicationRecord
     message: 'は¥300〜¥9,999,999の範囲で入力してください'
   }, format: { with: /\A[0-9]+\z/, message: 'は半角数字で入力してください' }
 
-  validate :image_presence # ← これ！
+  validate :image_presence
 
   private
 
