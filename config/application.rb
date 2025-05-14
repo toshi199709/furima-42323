@@ -11,7 +11,6 @@ module Furima42323
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
-    config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
     config.active_storage.variant_processor = :mini_magick
 
