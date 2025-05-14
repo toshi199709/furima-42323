@@ -31,7 +31,7 @@
         商品名
         <span class="indispensable">必須</span>
       </div>
-      <%= f.text_area :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
+      <%= f.text_field :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
       <div class="items-explain">
         <div class="weight-bold-text">
           商品の説明
@@ -55,7 +55,7 @@
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select :condition_id, Condition.all, :id, :name, { prompt: "---" }, { class:"select-box", id:"item-sales-status" } %>
+        <%= f.collection_select :condition_id, Condition.all, :id, :name, { prompt: "---" }, { class: "select-box", id: "item-sales-status" } %>
       </div>
     </div>
     <%# /商品の詳細 %>
