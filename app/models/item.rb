@@ -21,7 +21,6 @@ class Item < ApplicationRecord
 
   def price_validation
     raw_price = attributes_before_type_cast['price']
-    puts "DEBUG: raw_price = #{raw_price.inspect}"
 
     if raw_price.blank?
       errors.add(:price, "can't be blank")
