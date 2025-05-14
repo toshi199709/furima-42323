@@ -80,11 +80,9 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格が全角数字では出品できない' do
-        item = FactoryBot.build(:item)
-        item.assign_attributes(price: '３００') # ← ここで明示的に文字列で渡す
-        item.valid?
-        puts item.errors.full_messages # ← 確認用（最終的に削除してOK）
-        expect(item.errors[:price]).to include('must be a half-width number')
+        @item.assign_attributes(price: '３００') # ← ここで代入
+        @item.valid?
+        expect(@item.errors[:price]).to include('must be a half-width number')
       end
 
       it 'ユーザーが紐づいていなければ出品できない' do
