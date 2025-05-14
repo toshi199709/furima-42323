@@ -8,22 +8,33 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_day
 
-  validates :name, :description, :price, presence: true
+  validates :image, presence: { message: 'must be attached' }
+  validates :name, :description, presence: true
+
   validates :category_id, :condition_id, :shipping_fee_status_id, :prefecture_id, :shipping_day_id,
-            numericality: { other_than: 1, message: 'を選択してください' }
+            numericality: { other_than: 1, message: 'must be selected' }
 
-  validates :price, numericality: {
-    only_integer: true,
-    greater_than_or_equal_to: 300,
-    less_than_or_equal_to: 9_999_999,
-    message: 'は¥300〜¥9,999,999の範囲で入力してください'
-  }, format: { with: /\A[0-9]+\z/, message: 'は半角数字で入力してください' }
-
-  validate :image_presence
+  validate :price_validation
 
   private
 
-  def image_presence
-    errors.add(:image, 'を添付してください') unless image.attached?
+  def price_validation
+    raw_price = attributes_before_type_cast['price']
+    puts "DEBUG: raw_price = #{raw_price.inspect}"
+
+    if raw_price.blank?
+      errors.add(:price, "can't be blank")
+      return
+    end
+
+    unless raw_price.to_s.match?(/\A[0-9]+\z/)
+      errors.add(:price, 'must be a half-width number')
+      return
+    end
+
+    int_price = raw_price.to_i
+    return if int_price.between?(300, 9_999_999)
+
+    errors.add(:price, 'must be between ¥300 and ¥9,999,999')
   end
 end
