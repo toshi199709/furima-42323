@@ -12,6 +12,16 @@ class ItemsController < ApplicationController
     @items = Item.order(created_at: :desc)
   end
 
+  # def edit
+  #   @item = Item.find(params[:id])
+  # end
+
+  # def destroy
+  #   @item = Item.find(params[:id])
+  #   @item.destroy
+  #   redirect_to root_path, notice: '商品を削除しました'
+  # end
+
   def create
     @item = Item.new(item_params)
     @item.user = current_user # 出品者を紐づける
