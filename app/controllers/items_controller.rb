@@ -4,6 +4,10 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  def index
+    @items = Item.all
+  end
+
   def create
     @item = Item.new(item_params)
     @item.user = current_user # 出品者を紐づける
