@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
                                         :birthday
                                       ])
   end
+
+  def debug_users
+    render plain: User.column_names.join(', ')
+  end
 end
