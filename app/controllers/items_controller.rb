@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = Item.order(created_at: :desc)
   end
 
   def create
