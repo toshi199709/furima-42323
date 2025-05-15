@@ -12,9 +12,9 @@ class ItemsController < ApplicationController
     @items = Item.order(created_at: :desc)
   end
 
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end
+  def edit
+    @item = Item.find(params[:id])
+  end
 
   # def destroy
   #   @item = Item.find(params[:id])
