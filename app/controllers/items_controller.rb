@@ -26,7 +26,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find(params[:id])
     @item.destroy
     redirect_to root_path, notice: '商品を削除しました'
   end
