@@ -1,20 +1,29 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :redirect_unless_owner, only: [:edit]
+
   def new
     @item = Item.new
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def index
     @items = Item.order(created_at: :desc)
   end
 
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end
+  def edit
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit
+    end
+  end
 
   # def destroy
   #   @item = Item.find(params[:id])
@@ -40,5 +49,13 @@ class ItemsController < ApplicationController
       :name, :description, :category_id, :condition_id, :shipping_fee_status_id,
       :prefecture_id, :shipping_day_id, :price, :image
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def redirect_unless_owner
+    redirect_to root_path unless current_user.id == @item.user_id
   end
 end
