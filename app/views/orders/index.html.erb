@@ -30,6 +30,15 @@
       </p>
     </div>
     <%# /支払額の表示 %>
+    <% if @order && @order.errors.any? %>
+  <div class="error-alert">
+    <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li class="error-message"><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
     <%= form_with model: @order, url: item_orders_path(@item), id: 'charge-form', class: 'transaction-form-wrap', local: true, data: { turbo: false } do |f| %>
 
