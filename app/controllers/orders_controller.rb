@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   require 'payjp'
+  before_action :authenticate_user!
   before_action :set_item
   before_action :set_gon_public_key, only: [:index]
   before_action :redirect_if_invalid_order, only: [:index, :create]
