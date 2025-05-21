@@ -40,7 +40,9 @@
   </div>
 <% end %>
 
-    <%= form_with model: @order, url: item_orders_path(@item), id: 'charge-form', class: 'transaction-form-wrap', local: true, data: { turbo: false } do |f| %>
+<%= form_with model: @order_address, scope: :order_address, url: item_orders_path(@item), local: true, id: 'charge-form', data: { turbo: false } do |f| %>
+
+
 
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
