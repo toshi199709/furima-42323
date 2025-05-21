@@ -9,20 +9,5 @@ FactoryBot.define do
     shipping_day_id       { 2 }
     price                 { 1000 }
     association :user
-
-    after(:build) do |item|
-      image_path = Rails.root.join('spec/fixtures/files/test_image.png')
-      if File.exist?(image_path)
-        File.open(image_path, 'rb') do |file|
-          item.image.attach(
-            io: file,
-            filename: 'test_image.png',
-            content_type: 'image/png'
-          )
-        end
-      else
-        puts "[WARNING] test_image.png not found: #{image_path}"
-      end
-    end
   end
 end

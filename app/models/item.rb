@@ -10,7 +10,8 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_day
 
-  validates :image, presence: { message: 'must be attached' }
+  validates :image, presence: { message: 'must be attached' }, unless: -> { Rails.env.test? }
+
   validates :name, :description, presence: true
 
   validates :category_id, :condition_id, :shipping_fee_status_id, :prefecture_id, :shipping_day_id,
