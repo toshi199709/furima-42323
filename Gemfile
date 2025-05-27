@@ -54,7 +54,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-byebug'
-  
+
     gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
@@ -91,3 +91,4 @@ gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'payjp'
 gem 'gon'
+gem "aws-sdk-s3", require: false
